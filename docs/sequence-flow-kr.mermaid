@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant U as 사용자
+    participant S as 시스템
+    participant DB as 데이터베이스
+    participant AI as OpenAI API
+    participant V as 검증기
+    participant Sim as 시뮬레이터
+    participant R as 보고서 생성기
+
+    U->>S: 처리 시작
+    S->>DB: 네트워크 기술 가져오기
+    DB-->>S: 기술 반환
+    loop 각 기술에 대해
+        S->>AI: Suricata 규칙 생성
+        AI-->>S: 생성된 규칙 반환
+        S->>S: 규칙 후처리
+        S->>V: 규칙 문법 검증
+        V-->>S: 검증 결과 반환
+        S->>Sim: 규칙 시뮬레이션
+        Sim-->>S: 시뮬레이션 결과 반환
+        S->>DB: 규칙 및 결과 저장
+        S->>R: 기술 보고서 생성
+    end
+    S->>R: 요약 보고서 생성
+    R-->>U: 요약 보고서 제시

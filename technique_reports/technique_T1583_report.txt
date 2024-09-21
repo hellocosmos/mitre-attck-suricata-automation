@@ -1,0 +1,45 @@
+Technique Report: Acquire Infrastructure (T1583)
+==================================================
+
+ATT&CK Technique Details:
+Name: Acquire Infrastructure
+ID: T1583
+Description: Adversaries may buy, lease, rent, or obtain infrastructure that can be used during targeting. A wide variety of infrastructure exists for hosting and orchestrating adversary operations. Infrastructure solutions include physical or cloud servers, domains, and third-party web services.(Citation: TrendmicroHideoutsLease) Some infrastructure providers offer free trial periods, enabling infrastructure acquisition at limited to no cost.(Citation: Free Trial PurpleUrchin) Additionally, botnets are available for rent or purchase.
+
+Use of these infrastructure solutions allows adversaries to stage, launch, and execute operations. Solutions may help adversary operations blend in with traffic that is seen as normal, such as contacting third-party web services or acquiring infrastructure to support [Proxy](https://attack.mitre.org/techniques/T1090), including from residential proxy services.(Citation: amnesty_nso_pegasus)(Citation: FBI Proxies Credential Stuffing)(Citation: Mandiant APT29 Microsoft 365 2022) Depending on the implementation, adversaries may use infrastructure that makes it difficult to physically tie back to them as well as utilize infrastructure that can be rapidly provisioned, modified, and shut down.
+Detection: Consider use of services that may aid in tracking of newly acquired infrastructure, such as WHOIS databases for domain registration information. 
+
+Once adversaries have provisioned infrastructure (ex: a server for use in command and control), internet scans may help proactively discover adversary acquired infrastructure. Consider looking for identifiable patterns such as services listening, certificates in use, SSL/TLS negotiation features, or other response artifacts associated with adversary C2 software.(Citation: ThreatConnect Infrastructure Dec 2020)(Citation: Mandiant SCANdalous Jul 2020)(Citation: Koczwara Beacon Hunting Sep 2021)
+
+Detection efforts may be focused on related stages of the adversary lifecycle, such as during Command and Control.
+
+Generated Suricata Rule:
+```
+alert tcp any any -> any any (msg:"Potential Infrastructure Acquisition Activity"; fast_pattern; content:"lease|20|"; nocase; content:"rent|20|"; nocase; content:"obtain|20|"; nocase; sid:3001583; rev:1; classtype:attempted-admin; reference:url,https://attack.mitre.org/techniques/T1583/;)
+```
+
+Valid: No
+
+Syntax Validation:
+==================================================
+Syntax validation failed: E: detect-fast-pattern: fast_pattern found inside the rule, without a content context. Please use a content based keyword before using fast_pattern
+E: detect: error parsing signature "alert tcp any any -> any any (msg:"Potential Infrastructure Acquisition Activity"; fast_pattern; content:"lease|20|"; nocase; content:"rent|20|"; nocase; content:"obtain|20|"; nocase; sid:3001583; rev:1; classtype:attempted-admin; reference:url,https://attack.mitre.org/techniques/T1583/;)" from file /var/folders/gh/78bgnn3s10n75r0ttyjz3rt00000gn/T/tmp8e4bl893.rules at line 1
+E: suricata: Loading signatures failed.
+
+
+Simulator Validation:
+==================================================
+Simulation passed successfully.
+Simulation Alerts:
+- Alert triggered: "Potential Infrastructure Acquisition Activity"
+
+Flexible Validation:
+==================================================
+Validation Report for Acquire Infrastructure (T1583)
+==================================================
+
+Warnings:
+- No explicit reference to technique 'Acquire Infrastructure' found
+
+
+--------------------------------------------------

@@ -1,0 +1,45 @@
+Technique Report: Bootkit (T1067)
+==================================================
+
+ATT&CK Technique Details:
+Name: Bootkit
+ID: T1067
+Description: A bootkit is a malware variant that modifies the boot sectors of a hard drive, including the Master Boot Record (MBR) and Volume Boot Record (VBR). (Citation: MTrends 2016)
+
+Adversaries may use bootkits to persist on systems at a layer below the operating system, which may make it difficult to perform full remediation unless an organization suspects one was used and can act accordingly.
+
+### Master Boot Record
+The MBR is the section of disk that is first loaded after completing hardware initialization by the BIOS. It is the location of the boot loader. An adversary who has raw access to the boot drive may overwrite this area, diverting execution during startup from the normal boot loader to adversary code. (Citation: Lau 2011)
+
+### Volume Boot Record
+The MBR passes control of the boot process to the VBR. Similar to the case of MBR, an adversary who has raw access to the boot drive may overwrite the VBR to divert execution during startup to adversary code.
+Detection: Perform integrity checking on MBR and VBR. Take snapshots of MBR and VBR and compare against known good samples. Report changes to MBR and VBR as they occur for indicators of suspicious activity and further analysis.
+
+Generated Suricata Rule:
+```
+alert file any any -> any any (msg:"Potential Bootkit Activity Detected"; content:"|00 00 00 00|"; nocase; fast_pattern; pcre:"/^(?!.*(Windows|Linux|Mac)).*$/"; sid:3001067; rev:1; classtype:trojan-activity; reference:url,https://attack.mitre.org/techniques/T1067/;)
+```
+
+Valid: No
+
+Syntax Validation:
+==================================================
+Syntax validation failed: E: detect-parse: protocol "file" cannot be used in a signature.  Either detection for this protocol is not yet supported OR detection has been disabled for protocol through the yaml option app-layer.protocols.file.detection-enabled
+E: detect: error parsing signature "alert file any any -> any any (msg:"Potential Bootkit Activity Detected"; content:"|00 00 00 00|"; nocase; fast_pattern; pcre:"/^(?!.*(Windows|Linux|Mac)).*$/"; sid:3001067; rev:1; classtype:trojan-activity; reference:url,https://attack.mitre.org/techniques/T1067/;)" from file /var/folders/gh/78bgnn3s10n75r0ttyjz3rt00000gn/T/tmpuxo2wj_q.rules at line 1
+E: suricata: Loading signatures failed.
+
+
+Simulator Validation:
+==================================================
+Simulation failed.
+
+Flexible Validation:
+==================================================
+Validation Report for Bootkit (T1067)
+==================================================
+
+Errors:
+- Invalid rule header
+
+
+--------------------------------------------------

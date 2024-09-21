@@ -1,0 +1,40 @@
+Technique Report: Linux and Mac File and Directory Permissions Modification (T1222.002)
+==================================================
+
+ATT&CK Technique Details:
+Name: Linux and Mac File and Directory Permissions Modification
+ID: T1222.002
+Description: Adversaries may modify file or directory permissions/attributes to evade access control lists (ACLs) and access protected files.(Citation: Hybrid Analysis Icacls1 June 2018)(Citation: Hybrid Analysis Icacls2 May 2018) File and directory permissions are commonly managed by ACLs configured by the file or directory owner, or users with the appropriate permissions. File and directory ACL implementations vary by platform, but generally explicitly designate which users or groups can perform which actions (read, write, execute, etc.).
+
+Most Linux and Linux-based platforms provide a standard set of permission groups (user, group, and other) and a standard set of permissions (read, write, and execute) that are applied to each group. While nuances of each platform’s permissions implementation may vary, most of the platforms provide two primary commands used to manipulate file and directory ACLs: <code>chown</code> (short for change owner), and <code>chmod</code> (short for change mode).
+
+Adversarial may use these commands to make themselves the owner of files and directories or change the mode if current permissions allow it. They could subsequently lock others out of the file. Specific file and directory modifications may be a required step for many techniques, such as establishing Persistence via [Unix Shell Configuration Modification](https://attack.mitre.org/techniques/T1546/004) or tainting/hijacking other instrumental binary/configuration files via [Hijack Execution Flow](https://attack.mitre.org/techniques/T1574).(Citation: 20 macOS Common Tools and Techniques) 
+Detection: Monitor and investigate attempts to modify ACLs and file/directory ownership. Many of the commands used to modify ACLs and file/directory ownership are built-in system utilities and may generate a high false positive alert rate, so compare against baseline knowledge for how systems are typically used and correlate modification events with other indications of malicious activity where possible. Commonly abused command arguments include <code>chmod +x</code>, <code>chmod -R 755</code>, and <code>chmod 777</code>.(Citation: 20 macOS Common Tools and Techniques) 
+
+Consider enabling file/directory permission change auditing on folders containing key binary/configuration files.
+
+Generated Suricata Rule:
+```
+alert tcp any any -> any any (msg:"Potential Linux/Mac File and Directory Permissions Modification"; content:"chmod"; fast_pattern; nocase; pcre:"/chmod\s+(\+x|-R\s+755|-R\s+777|777)/"; sid:3222002; rev:1; classtype:attempted-admin; reference:url,https://attack.mitre.org/techniques/T1222.002/;)
+```
+
+Valid: No
+
+Syntax Validation:
+==================================================
+Syntax validation passed
+
+Simulator Validation:
+==================================================
+Simulation failed.
+
+Flexible Validation:
+==================================================
+Validation Report for Linux and Mac File and Directory Permissions Modification (T1222.002)
+==================================================
+
+Warnings:
+- No explicit reference to technique 'Linux and Mac File and Directory Permissions Modification' found
+
+
+--------------------------------------------------
