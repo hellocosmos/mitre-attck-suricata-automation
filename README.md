@@ -1,3 +1,6 @@
+- The implementation of this code is freely available for use. If you wish to use it commercially, consultation with the author is required. When distributing, you must specify the author and license.
+- author : hellocosmos@gmail.com
+
 ## AI-based Suricata Workflow Automation with MITRE ATT&CK
 ## 1. Overview
 This code implements a system that automatically converts techniques from the MITRE ATT&CK framework into rules for the Suricata intrusion detection system (IDS). The system performs the following main functions:
