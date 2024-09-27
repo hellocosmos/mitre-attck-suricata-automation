@@ -1,4 +1,4 @@
-# AI-based Suricata Workflow Automation with MITRE ATT&CK
+## AI-based Suricata Workflow Automation with MITRE ATT&CK
 ## 1. Overview
 This code implements a system that automatically converts techniques from the MITRE ATT&CK framework into rules for the Suricata intrusion detection system (IDS). The system performs the following main functions:
 1. Extract network-related techniques from the MITRE ATT&CK database
@@ -57,7 +57,7 @@ This system effectively links the MITRE ATT&CK framework with Suricata IDS to au
 
 ---
 
-# AI기반의 MITRE ATT&CK와 Suricat 보안룰셋 워크 플로우 자동화
+## AI기반의 MITRE ATT&CK와 Suricat 보안룰셋 워크 플로우 자동화
 
 ## 1. 개요
 
