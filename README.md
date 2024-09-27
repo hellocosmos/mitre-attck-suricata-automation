@@ -1,4 +1,63 @@
-# AI based on Suricata Workflow Automation with MITRE ATT&CK
+# AI-based Suricata Workflow Automation with MITRE ATT&CK
+## 1. Overview
+This code implements a system that automatically converts techniques from the MITRE ATT&CK framework into rules for the Suricata intrusion detection system (IDS). The system performs the following main functions:
+1. Extract network-related techniques from the MITRE ATT&CK database
+2. Automatically generate Suricata rules for each technique
+3. Validate the generated rules
+4. Compile the results into a report
+## 2. Main Classes and Functions
+### 2.1 SuricataRule Class
+- Represents the structure of a Suricata rule
+- Consists of headers and options
+### 2.2 SuricataRuleValidator Class
+- Checks the validity of generated Suricata rules
+- Validates rule syntax, required options, performance impact, etc.
+### 2.3 SuricataSimulator Class
+- Tests the actual operation of generated rules through simulation
+- Creates virtual network packets to verify rule application results
+### 2.4 MitreAttackSuricataSystem Class
+- Core class of the entire system
+- Manages all processes including MITRE ATT&CK database integration, OpenAI GPT model usage, Suricata rule generation and validation
+## 3. Main Process Analysis
+### 3.1 Database Initialization and Connection
+- Uses SQLite database to store MITRE ATT&CK technique information and generated Suricata rules
+### 3.2 Filtering Network-Related Techniques
+- Extracts techniques containing network-related keywords from the MITRE ATT&CK database
+### 3.3 Suricata Rule Generation
+- Uses OpenAI's GPT-4o-mini model to automatically generate Suricata rules for each technique
+- Generated rules undergo post-processing to refine format and content
+### 3.4 Rule Validity Verification
+1. Syntax validation using Suricata command-line tool
+2. Flexible validation through SuricataRuleValidator
+3. Operational simulation using SuricataSimulator
+### 3.5 Result Report Generation
+- Generate detailed reports for each technique
+- Create a summary report for the entire process
+## 4. Key Technologies and Libraries
+- Python 3.x
+- SQLite3: Local database management
+- OpenAI API: Rule generation through GPT model
+- Suricata: IDS rule validation
+- Regular expressions (re module): String processing and pattern matching
+- Logging (logging module): Debugging and process tracking
+## 5. Code Quality and Improvement Areas
+### 5.1 Strengths
+- Well-modularized with clearly separated functions
+- Detailed logging enables easy debugging and monitoring
+- Multiple validation stages increase the reliability of generated rules
+### 5.2 Areas for Improvement
+- Error handling: Insufficient handling of some exception cases
+- Configuration management: Hardcoded values should be separated into a configuration file
+- Parallel processing: Consider parallel processing for performance improvement when handling large volumes of techniques
+- Test code: Need to add unit tests and integration tests
+## 6. Conclusion
+This system effectively links the MITRE ATT&CK framework with Suricata IDS to automatically generate rules for responding to the latest cyber threats. Rule generation using the GPT model and multi-stage validation process ensure high-quality Suricata rules. However, performance verification in real environments and continuous updates are necessary.
+
+
+
+---
+
+# AI기반의 MITRE ATT&CK와 Suricat 보안룰셋 워크 플로우 자동화
 
 ## 1. 개요
 
