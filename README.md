@@ -1,4 +1,4 @@
-- The implementation of this code is freely available for use. If you wish to use it commercially, consultation with the author is required. When distributing, you must specify the author and license.
+- The implementation of this code is freely available for personal use. If you wish to use it commercially, consultation with the author is required. When distributing, you must specify the author and license.
 - author : hellocosmos@gmail.com
 
 ## AI-based Suricata Workflow Automation with MITRE ATT&CK
